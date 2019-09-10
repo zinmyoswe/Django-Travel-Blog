@@ -8,24 +8,27 @@
         <main class="post blog-post col-lg-8"> 
           <div class="container">
             <div class="post-single">
-              <div class="post-thumbnail"><img src="{% static 'img/blog-post-3.jpeg'%}" alt="..." class="img-fluid"></div>
+              <div class="post-thumbnail"><img src="{{post.thumbnail.url}}" alt="..." class="img-fluid"></div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
-                  <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+                  <div class="category">
+                    {% for cat in post.categories.all%}
+                    <a href="#">{{cat}}</a>
+                    {% endfor %}
+                  </div>
                 </div>
-                <h1>Diversity in Engineering: The Effect on Questions<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <h1>{{post.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
                 <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="{% static 'img/avatar-1.jpg'%}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>John Doe</span></div></a>
+                    <div class="avatar"><img src="{{ post.author.profile_picture.url}}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{post.author.user.username}}</span></div></a>
                   <div class="d-flex align-items-center flex-wrap">       
-                    <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-                    <div class="views"><i class="icon-eye"></i> 500</div>
-                    <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                    <div class="date"><i class="icon-clock"></i> {{post.timestamp|timesince}} ago</div>
+                    <div class="views"><i class="icon-eye"></i>{{post.view_count}}</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{post.comment_count}}</div>
                   </div>
                 </div>
                 <div class="post-body">
-                  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <p class="lead">{{post.overview}}</p>
                   <p> <img src="{% static 'img/featured-pic-3.jpeg'%}" alt="..." class="img-fluid"></p>
                   <h3>Lorem Ipsum Dolor</h3>
                   <p>div Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus iusto voluptates deleniti similique rerum ducimus sint ex odio saepe. Sapiente quae pariatur ratione quis perspiciatis deleniti accusantium</p>
