@@ -59,7 +59,7 @@
                 </div>
                 <div class="post-comments">
                   <header>
-                    <h3 class="h6">Post Comments<span class="no-of-comments">(3)</span></h3>
+                    <h3 class="h6">Post Comments<span class="no-of-comments">({{post.comments.count}})</span></h3>
                   </header>
                   {% for comment in post.get_comments %}
                   <div class="comment">  
