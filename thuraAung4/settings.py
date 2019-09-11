@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post.apps.PostConfig',
     'marketing',
+    'crispy_forms',
     'tinymce'
 ]
 
