@@ -21,7 +21,7 @@ class Category(models.Model):
         return self.title
 
 class Comment(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     content = HTMLField('Content')
     post = models.ForeignKey(
@@ -55,4 +55,8 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={
             'id': self.id
         })
+
+    @property
+    def get_comments(self):
+        return self.comments.all().order_by('-timestamp')
 

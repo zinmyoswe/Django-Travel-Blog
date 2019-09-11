@@ -61,17 +61,25 @@
                   <header>
                     <h3 class="h6">Post Comments<span class="no-of-comments">(3)</span></h3>
                   </header>
-                  <div class="comment">
+                  {% for comment in post.get_comments %}
+                  <div class="comment">  
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/user.svg'%}" alt="..." class="img-fluid rounded-circle"></div>
-                        <div class="title"><strong>Jabi Hernandiz</strong><span class="date">May 2016</span></div>
+                        <div class="image">
+                          {% if comment.user.author %}
+                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="img-fluid rounded-circle">
+                          {% else %}
+                          <img src="{% static 'img/user.svg' %}" alt="..." class="img-fluid rounded-circle">
+                          {% endif %}
+                        </div>
+                        <div class="title"><strong>{{comment.user.username}}</strong><span class="date">{{comment.timestamp| timesince}}</span></div>
                       </div>
                     </div>
                     <div class="comment-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                      <p>{{comment.content}}</p>
                     </div>
                   </div>
+                  {% endfor %}
                   <div class="comment">
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
@@ -95,6 +103,7 @@
                     </div>
                   </div>
                 </div>
+                {% if request.user.is_authenticated %}
                 <div class="add-comment">
                   <header>
                     <h3 class="h6">Leave a reply</h3>
@@ -111,6 +120,7 @@
                     </div>
                   </form>
                 </div>
+                {% endif %}
               </div>
             </div>
           </div>
