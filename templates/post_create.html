@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
 
+<div class="col-4 offset-4 mb-5 mt-5">
+<h3>Create an Article</h3>
 <form method="POST" action=".">
     {% csrf_token %}
-    {{ form.as_p}}
-    <button type="submit">Submit</button>
+    {{ form|crispy}}
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+</div>
 {% endblock content %}
