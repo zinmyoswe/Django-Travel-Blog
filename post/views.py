@@ -129,4 +129,6 @@ def post_update(request, id):
     return render(request, 'post_create.html', context)
 
 def post_delete(request, id):
-        pass
+        post = get_object_or_404(Post, id=id)
+        post.delete()
+        return redirect(reverse("post-list"))
